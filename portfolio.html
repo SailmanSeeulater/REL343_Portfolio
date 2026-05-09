@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Religion & Societal Progress — Perfect Phanitchaleun</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #E8C97A;
+    --deep: #0E0C0A;
+    --dark: #1A1610;
+    --mid: #2C2518;
+    --warm: #3D3220;
+    --cream: #F5EDD8;
+    --muted: #9E8E72;
+    --text: #E8DECA;
+    --accent-red: #8B3A3A;
+    --accent-blue: #2A4A6B;
+    --accent-green: #2D5A3D;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--deep);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(14,12,10,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; letter-spacing: 0.15em;
+    color: var(--gold); text-transform: uppercase;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.78rem; letter-spacing: 0.12em; text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid; place-items: center;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 3rem 4rem;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 20% 50%, rgba(201,168,76,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 80% 30%, rgba(43,74,107,0.12) 0%, transparent 60%),
+      repeating-linear-gradient(
+        0deg, transparent, transparent 79px,
+        rgba(201,168,76,0.03) 80px
+      ),
+      repeating-linear-gradient(
+        90deg, transparent, transparent 79px,
+        rgba(201,168,76,0.03) 80px
+      );
+  }
+  .hero-inner { position: relative; max-width: 900px; text-align: center; }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.72rem; letter-spacing: 0.3em;
+    color: var(--gold); text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0; animation: fadeUp 0.8s 0.2s forwards;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 900; line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 1rem;
+    opacity: 0; animation: fadeUp 0.8s 0.4s forwards;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--gold-light);
+  }
+  .hero-subtitle {
+    font-size: 1.1rem; color: var(--muted); max-width: 580px; margin: 0 auto 2.5rem;
+    opacity: 0; animation: fadeUp 0.8s 0.6s forwards;
+  }
+  .hero-meta {
+    display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+    opacity: 0; animation: fadeUp 0.8s 0.8s forwards;
+  }
+  .hero-meta-item {
+    display: flex; flex-direction: column; align-items: center; gap: 0.3rem;
+  }
+  .hero-meta-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em; color: var(--gold); text-transform: uppercase;
+  }
+  .hero-meta-value { font-size: 0.88rem; color: var(--text); }
+
+  .scroll-hint {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+    opacity: 0; animation: fadeUp 0.8s 1.2s forwards;
+  }
+  .scroll-hint span {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px; height: 50px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* ── SECTION BASE ── */
+  section { padding: 6rem 3rem; }
+  .section-inner { max-width: 1100px; margin: 0 auto; }
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 700; color: var(--cream);
+    margin-bottom: 1.5rem; line-height: 1.2;
+  }
+  .divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(to right, var(--gold), transparent);
+    margin-bottom: 2rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--dark); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+  .about-text p { color: var(--muted); margin-bottom: 1.2rem; font-size: 0.97rem; }
+  .about-text p strong { color: var(--cream); font-weight: 500; }
+  .about-facts {
+    display: flex; flex-direction: column; gap: 1rem;
+    border-left: 1px solid rgba(201,168,76,0.2);
+    padding-left: 2rem;
+  }
+  .fact {
+    display: flex; flex-direction: column; gap: 0.2rem;
+  }
+  .fact-label {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+  }
+  .fact-value { font-size: 0.92rem; color: var(--text); }
+
+  /* ── QUESTION ── */
+  #question { background: var(--deep); }
+  .question-card {
+    background: linear-gradient(135deg, rgba(201,168,76,0.07), rgba(201,168,76,0.02));
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px;
+    padding: 3rem 3.5rem;
+    position: relative; overflow: hidden;
+  }
+  .question-card::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 12rem; line-height: 1;
+    color: rgba(201,168,76,0.06);
+    position: absolute; top: -1rem; left: 1rem;
+    pointer-events: none;
+  }
+  .question-text {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    font-style: italic; color: var(--cream);
+    line-height: 1.5; position: relative; z-index: 1;
+    margin-bottom: 1.5rem;
+  }
+  .question-body { color: var(--muted); font-size: 0.96rem; position: relative; z-index: 1; }
+
+  /* ── THEORIES ── */
+  #theories { background: var(--dark); }
+  .theories-intro { max-width: 620px; margin-bottom: 4rem; }
+  .theories-intro p { color: var(--muted); }
+
+  .theory-block {
+    display: grid; grid-template-columns: 80px 1fr; gap: 0;
+    margin-bottom: 1px; position: relative;
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .theory-block.visible { opacity: 1; transform: translateY(0); }
+
+  .theory-num {
+    background: var(--mid);
+    display: grid; place-items: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem; font-weight: 900;
+    color: rgba(201,168,76,0.25);
+    padding: 2.5rem 0;
+    border-right: 2px solid var(--gold);
+    transition: background 0.3s;
+  }
+  .theory-content {
+    background: var(--mid);
+    padding: 2.5rem 3rem;
+    transition: background 0.3s;
+  }
+  .theory-block:hover .theory-num,
+  .theory-block:hover .theory-content { background: var(--warm); }
+
+  .theory-tag {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+  .theory-tag.marx { color: #C06060; }
+  .theory-tag.weber { color: #6A9FBF; }
+  .theory-tag.rct { color: #7BBF8A; }
+
+  .theory-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--cream);
+    margin-bottom: 0.75rem;
+  }
+  .theory-body { color: var(--muted); font-size: 0.94rem; margin-bottom: 1.2rem; }
+  .theory-application {
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding-top: 1rem; margin-top: 1rem;
+  }
+  .theory-application-label {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .theory-application p { color: var(--text); font-size: 0.93rem; }
+
+  /* ── EVIDENCE ── */
+  #evidence { background: var(--deep); }
+  .evidence-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+    margin-top: 3rem;
+  }
+  .evidence-card {
+    background: var(--mid); padding: 2rem;
+    transition: background 0.3s;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.5s, transform 0.5s, background 0.3s;
+  }
+  .evidence-card.visible { opacity: 1; transform: translateY(0); }
+  .evidence-card:hover { background: var(--warm); }
+  .evidence-type {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 0.75rem;
+  }
+  .evidence-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; color: var(--cream); margin-bottom: 0.75rem;
+    line-height: 1.35;
+  }
+  .evidence-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+  .evidence-connection {
+    margin-top: 1rem; padding-top: 1rem;
+    border-top: 1px solid rgba(201,168,76,0.12);
+    font-size: 0.82rem; color: var(--muted);
+  }
+  .evidence-connection strong { color: var(--gold-light); font-weight: 500; }
+
+  /* ── PAPER ── */
+  #paper { background: var(--dark); }
+  .paper-wrapper {
+    display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start;
+  }
+  .paper-sidebar { position: sticky; top: 7rem; }
+  .paper-meta-card {
+    background: var(--mid); padding: 2rem;
+    border-left: 2px solid var(--gold);
+  }
+  .paper-meta-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--cream); margin-bottom: 1.2rem;
+  }
+  .paper-meta-row {
+    display: flex; justify-content: space-between;
+    padding: 0.5rem 0; border-bottom: 1px solid rgba(201,168,76,0.1);
+    font-size: 0.82rem;
+  }
+  .paper-meta-row:last-child { border-bottom: none; }
+  .paper-meta-key { color: var(--muted); }
+  .paper-meta-val { color: var(--text); text-align: right; max-width: 55%; }
+  .paper-toc { margin-top: 1.5rem; }
+  .paper-toc h4 {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .paper-toc ol { list-style: none; counter-reset: toc; }
+  .paper-toc li {
+    counter-increment: toc; padding: 0.3rem 0;
+    font-size: 0.82rem; color: var(--muted);
+    display: flex; gap: 0.75rem;
+  }
+  .paper-toc li::before {
+    content: counter(toc, decimal-leading-zero);
+    font-family: 'DM Mono', monospace; color: var(--gold);
+    font-size: 0.7rem; flex-shrink: 0; margin-top: 0.1rem;
+  }
+  .paper-body { color: var(--muted); font-size: 0.95rem; }
+  .paper-body h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; color: var(--cream);
+    margin: 2.5rem 0 0.8rem;
+  }
+  .paper-body h3:first-child { margin-top: 0; }
+  .paper-body p { margin-bottom: 1.1rem; }
+  .paper-body .citation { color: var(--gold-light); font-style: italic; font-size: 0.9em; }
+  .paper-body blockquote {
+    border-left: 2px solid var(--gold);
+    padding: 0.75rem 1.5rem; margin: 1.5rem 0;
+    background: rgba(201,168,76,0.04);
+    color: var(--text); font-style: italic;
+  }
+  .works-cited {
+    margin-top: 3rem; padding-top: 2rem;
+    border-top: 1px solid rgba(201,168,76,0.2);
+  }
+  .works-cited h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; color: var(--cream); margin-bottom: 1rem;
+  }
+  .works-cited p { font-size: 0.85rem; color: var(--muted); margin-bottom: 0.5rem; }
+
+  /* ── REFLECTION ── */
+  #reflection { background: var(--deep); }
+  .reflection-content { max-width: 720px; }
+  .reflection-content p { color: var(--muted); margin-bottom: 1.2rem; }
+  .reflection-content p strong { color: var(--cream); font-weight: 500; }
+  .reflection-pull {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem; font-style: italic;
+    color: var(--cream); line-height: 1.5;
+    padding: 2rem 0 2rem 2rem;
+    border-left: 3px solid var(--gold);
+    margin: 2.5rem 0;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--deep);
+    border-top: 1px solid rgba(201,168,76,0.12);
+    padding: 3rem; text-align: center;
+  }
+  footer p { font-size: 0.8rem; color: var(--muted); }
+  footer strong { color: var(--gold); font-weight: 500; }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.2); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.5rem; }
+    section { padding: 4rem 1.5rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .theory-block { grid-template-columns: 50px 1fr; }
+    .theory-content { padding: 1.5rem; }
+    .evidence-grid { grid-template-columns: 1fr; }
+    .paper-wrapper { grid-template-columns: 1fr; }
+    .paper-sidebar { position: static; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Perfect Phanitchaleun</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#question">Question</a></li>
+    <li><a href="#theories">Theories</a></li>
+    <li><a href="#evidence">Evidence</a></li>
+    <li><a href="#paper">Paper</a></li>
+    <li><a href="#reflection">Reflection</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">REL S343 · Sociology of Religion · SDSU · 2026</p>
+    <h1 class="hero-title"><em>Religious Study Portfolio</em></h1>
+    <p class="hero-subtitle">Examining the role of religious teaching and collective identity in shaping human advancement — through Marx, Weber, and Rational Choice Theory.</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Author</span>
+        <span class="hero-meta-value">Perfect Phanitchaleun</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Origin</span>
+        <span class="hero-meta-value">Vientiane, Laos</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Faith</span>
+        <span class="hero-meta-value">Buddhist</span>
+      </div>
+      <div class="hero-meta-item">
+        <span class="hero-meta-label">Professor</span>
+        <span class="hero-meta-value">Rebecca Bartel</span>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-tag">About Me</p>
+        <div class="divider"></div>
+        <p>My name is <strong>Perfect Phanitchaleun</strong> — a 22-year-old junior at San Diego State University, originally from Laos. I was raised in a Buddhist household with a Chinese heritage on my father's side. These two worlds have deeply shaped how I understand religion, community, and progress.</p>
+        <p>Growing up in Laos, religion was never just a belief system; it was woven into daily life through festivals like the <strong>Lao New Year (Pi Mai)</strong> and the <strong>That Luang Festival</strong> — both centered on Buddhist values of community, merit, and collective wellbeing.</p>
+        <p>Coming to the United States and studying at SDSU has exposed me to a radically different relationship between religion and public life. The diversity of faiths here — and the debate over how much religion should influence society — made me want to ask a deeper question: <em>Is religion itself what drives progress, or is it simply the power of people gathering under a shared idea?</em></p>
+      </div>
+      <div class="about-facts">
+        <div class="fact">
+          <span class="fact-label">University</span>
+          <span class="fact-value">San Diego State University</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Year</span>
+          <span class="fact-value">Junior (3rd Year)</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Course</span>
+          <span class="fact-value">REL S343 — Sociology of Religion</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Religious Background</span>
+          <span class="fact-value">Buddhism (Theravada tradition)</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Cultural Heritage</span>
+          <span class="fact-value">Laotian & Chinese</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Analytical Case</span>
+          <span class="fact-value">France's 2023 Abaya Ban in Public Schools</span>
+        </div>
+        <div class="fact">
+          <span class="fact-label">Central Question</span>
+          <span class="fact-value">Does religion advance society through teaching, or through collectivism?</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENTRAL QUESTION -->
+<section id="question">
+  <div class="section-inner">
+    <p class="section-tag">The Research Question</p>
+    <h2 class="section-title">What Really Drives Progress?</h2>
+    <div class="divider"></div>
+    <div class="question-card">
+      <p class="question-text">Does religion contribute to societal progress mainly through its various teachings, or is it simply the result of collectivism?</p>
+      <div class="question-body">
+        <p>As most religions spread ethical and moral teachings to their followers, the question is whether these teachings are what drive technological and social progression — or whether progress is simply an effect of the collective nature of religion, where a large group of people align under the same goal.</p>
+        <p style="margin-top:1rem;">Although the power of collectivism is substantial to the existence of religion, if the teachings had no substance, truth, or meaning, collectivism couldn't be achieved — sound teachings are the glue that holds a group together. Either way, religion consistently brings people with different views toward shared purpose and coordinated action.</p>
+        <p style="margin-top:1rem; color: var(--text); font-style: italic;">To explore this question, I apply three sociological theories — Marx's Critical Theory, Weber's Protestant Ethic, and Rational Choice Theory — to one concrete case: the 2023 French abaya ban, and what it reveals about religion's role in modern society.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THEORIES -->
+<section id="theories">
+  <div class="section-inner">
+    <p class="section-tag">Theoretical Framework</p>
+    <h2 class="section-title">Three Lenses,<br>One Question</h2>
+    <div class="divider"></div>
+    <div class="theories-intro">
+      <p>Each of these classical theories provides a different answer to how religion interacts with society — and together, they reveal the complexity behind any simple claim that "religion drives progress."</p>
+    </div>
+
+    <!-- MARX -->
+    <div class="theory-block" data-animate>
+      <div class="theory-num">I</div>
+      <div class="theory-content">
+        <p class="theory-tag marx">Karl Marx · 1818–1883</p>
+        <h3 class="theory-name">Critical Theory & Religion as Ideology</h3>
+        <div class="theory-body">
+          <p>For Marx, religion is a dependent variable — it reflects and reinforces the material conditions of society rather than creating them. Religion is part of the <em>superstructure</em>: the cultural, legal, and ideological layer built upon economic foundations. It does not drive progress; it justifies the status quo.</p>
+          <p style="margin-top:0.75rem;">Marx's most famous phrase — "religion is the opium of the people" — captures this idea. Religion offers oppressed classes an imaginary happiness that distracts from real suffering. It is <em>false consciousness</em>: a veil that makes inequality seem natural or divinely ordained. Progress, in this view, comes despite religion's comfort-giving function, not because of it.</p>
+          <p style="margin-top:0.75rem;">Yet Marx also acknowledged religion's protest function: "the sigh of the oppressed creature" — a moral cry against real injustice, as seen in Liberation Theology, where Latin American Catholic priests used religious teaching explicitly to challenge capitalist exploitation.</p>
+        </div>
+        <div class="theory-application">
+          <p class="theory-application-label">Applied to the Abaya Ban</p>
+          <p>From a Marxist lens, France's Laïcité functions as an <strong>ideology</strong> — a part of the superstructure that protects the dominant secular-cultural class. By labeling the abaya "oppressive," the state uses false consciousness arguments to bypass the actual agency of Muslim women, who are largely from immigrant working-class backgrounds. The ban is not about religion in the abstract; it is about <strong>class, power, and who defines normal</strong>. Religion here becomes a tool for exclusion rather than a driver of progress.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- WEBER -->
+    <div class="theory-block" data-animate>
+      <div class="theory-num">II</div>
+      <div class="theory-content">
+        <p class="theory-tag weber">Max Weber · 1864–1920</p>
+        <h3 class="theory-name">The Protestant Ethic & Rationalization</h3>
+        <div class="theory-body">
+          <p>Where Marx saw religion as blocking progress, Weber showed that religious <em>teaching</em> could actively create it. In <em>The Protestant Ethic and the Spirit of Capitalism</em> (1904–05), Weber argued that Calvinist doctrines — particularly predestination and the concept of a "calling" (Beruf) — produced a distinct worldview: hard work, self-denial, and systematic profit-seeking as moral duties.</p>
+          <p style="margin-top:0.75rem;">This Protestant ethic became the <em>spirit</em> of capitalism. Here, religious teachings did not simply reflect society — they actively transformed it, producing Western modernity's most defining economic system. Progress, in Weber's account, was partly a spiritual revolution before it was an economic one.</p>
+          <p style="margin-top:0.75rem;">However, Weber also saw the cost: <em>rationalization</em> — the process by which modern institutions become governed by impersonal rules rather than tradition or faith — eventually locks people in an <strong>"iron cage"</strong> of bureaucratic efficiency, stripping life of meaning.</p>
+        </div>
+        <div class="theory-application">
+          <p class="theory-application-label">Applied to the Abaya Ban</p>
+          <p>Weber's lens illuminates France's obsession with <strong>defining and regulating</strong> religious symbols. The French state acts as a hyper-rationalized institution — attempting to "disenchant" the school by eliminating any sign of allegiance to something beyond the State. This is rationalization in action: replacing living religious practice with administrative classification. The tragedy, in Weber's terms, is that this process does not produce freedom — it produces the <strong>iron cage</strong>, where identity itself must be bureaucratically approved.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RCT -->
+    <div class="theory-block" data-animate>
+      <div class="theory-num">III</div>
+      <div class="theory-content">
+        <p class="theory-tag rct">Stark & Finke · Iannaccone</p>
+        <h3 class="theory-name">Rational Choice Theory & the Religious Marketplace</h3>
+        <div class="theory-body">
+          <p>Rational Choice Theory (RCT), developed by sociologists Rodney Stark, Roger Finke, and Laurence Iannaccone, argues that religious behavior follows economic logic: individuals weigh the costs and benefits of religious participation and choose what best serves their needs — spiritual, social, psychological, or communal.</p>
+          <p style="margin-top:0.75rem;">Stark and Finke's key propositions include: society always has diverse religious demand niches; pluralism is the natural state of religion; and monopoly religions (state-supported) become inefficient and unattractive. Competition among "religious firms" drives innovation, relevance, and ultimately, social vitality. This theory supports the idea that collectivism <em>and</em> teaching both matter — people choose religions whose teachings resonate, and the collective grows from that rational selection.</p>
+          <p style="margin-top:0.75rem;">Iannaccone adds the "demanding churches" insight: stricter religions with higher costs of membership are actually more successful, because high barriers filter out free-riders and increase group commitment.</p>
+        </div>
+        <div class="theory-application">
+          <p class="theory-application-label">Applied to the Abaya Ban</p>
+          <p>RCT offers a striking perspective: Muslim women choosing to wear the abaya in a hostile environment are making a <strong>high-cost rational choice</strong> — demonstrating deep commitment to their religious identity precisely because the stakes are high. France's ban does not eliminate religious demand; it <strong>intensifies</strong> it. By restricting the religious marketplace through state monopoly on acceptable expression, France may actually strengthen Islamic identity rather than neutralize it — precisely the outcome Stark and Finke predict when religious pluralism is suppressed by force.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVIDENCE -->
+<section id="evidence">
+  <div class="section-inner">
+    <p class="section-tag">Media Sources & Evidence</p>
+    <h2 class="section-title">Evidence from<br>the World</h2>
+    <div class="divider"></div>
+    <div class="evidence-grid">
+
+      <div class="evidence-card" data-animate>
+        <p class="evidence-type">News Report · 2023</p>
+        <h3 class="evidence-title">France Bans Abayas in Public Schools (September 2023)</h3>
+        <p class="evidence-desc">French Education Minister Gabriel Attal announced a national ban on abayas in public schools, citing the defense of Laïcité. The decision sparked international debate about secularism, religious freedom, and the rights of Muslim women. Hundreds of girls were turned away from school on the first day.</p>
+        <div class="evidence-connection"><strong>Theoretical link:</strong> Marx — the ban as ideological tool of the dominant cultural class; Weber — rationalization of religious identity by the state.</div>
+      </div>
+
+      <div class="evidence-card" data-animate style="transition-delay:0.1s">
+        <p class="evidence-type">Academic Source · 2005</p>
+        <h3 class="evidence-title">Saba Mahmood, <em>Politics of Piety</em></h3>
+        <p class="evidence-desc">Mahmood's ethnographic study of Egyptian women's mosque movements argues that religious discipline can be a form of ethical self-determination — not oppression. Agency does not require rejecting norms; it can exist within them. Secular governance reshapes what religion is allowed to be.</p>
+        <div class="evidence-connection"><strong>Theoretical link:</strong> RCT — religious practice as a rational choice with internal logic; Marx — challenging the "false consciousness" framing used to dismiss Muslim women's choices.</div>
+      </div>
+
+      <div class="evidence-card" data-animate style="transition-delay:0.2s">
+        <p class="evidence-type">Academic Source · 1998</p>
+        <h3 class="evidence-title">Jonathan Z. Smith, "Religion, Religions, Religious"</h3>
+        <p class="evidence-desc">Smith argues that "religion" is not a native category — it is a conceptual tool created by scholars and shaped historically by Western Protestant Christianity. This has profound consequences: when the French state defines what counts as "too religious," it exercises definitional power rooted in a particular cultural tradition.</p>
+        <div class="evidence-connection"><strong>Theoretical link:</strong> Weber — the rationalization of religion into bureaucratic categories; Marx — the superstructure's power to define legitimate identity.</div>
+      </div>
+
+      <div class="evidence-card" data-animate style="transition-delay:0.3s">
+        <p class="evidence-type">Historical Case · 20th Century</p>
+        <h3 class="evidence-title">Liberation Theology in Latin America (1960s–1990s)</h3>
+        <p class="evidence-desc">Latin American Catholic priests, led by figures like Gustavo Gutiérrez, argued that God has a "preferential option for the poor" — and used religious teaching directly to challenge capitalist exploitation and state violence. This is a case where religious teachings drove social progress, contradicting Marx's dismissal of religion as purely ideological.</p>
+        <div class="evidence-connection"><strong>Theoretical link:</strong> Marx's own framework — religion as the "protest" of the oppressed; demonstrates that teaching and collectivism can work together for real change.</div>
+      </div>
+
+      <div class="evidence-card" data-animate style="transition-delay:0.4s">
+        <p class="evidence-type">Sociological Study · 1994</p>
+        <h3 class="evidence-title">Stark & Finke, <em>The Churching of America</em></h3>
+        <p class="evidence-desc">Stark and Finke challenge the secularization thesis by showing that religious participation in America actually grew over two centuries. Only 17% of Americans claimed religious affiliation at the Revolution; today it is far higher. Religious pluralism and competition, not decline, characterize modernity.</p>
+        <div class="evidence-connection"><strong>Theoretical link:</strong> RCT — religious vitality correlates with marketplace freedom; directly challenges Weber's disenchantment narrative.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PAPER -->
+<section id="paper">
+  <div class="section-inner">
+    <p class="section-tag">Analytical Paper</p>
+    <h2 class="section-title">The Limits of<br>Secular Neutrality</h2>
+    <div class="divider"></div>
+    <div class="paper-wrapper">
+      <!-- Sidebar -->
+      <div class="paper-sidebar">
+        <div class="paper-meta-card">
+          <h3>Paper Details</h3>
+          <div class="paper-meta-row">
+            <span class="paper-meta-key">Author</span>
+            <span class="paper-meta-val">Perfect Phanitchaleun</span>
+          </div>
+          <div class="paper-meta-row">
+            <span class="paper-meta-key">Professor</span>
+            <span class="paper-meta-val">Rebecca Bartel</span>
+          </div>
+          <div class="paper-meta-row">
+            <span class="paper-meta-key">Course</span>
+            <span class="paper-meta-val">REL S343</span>
+          </div>
+          <div class="paper-meta-row">
+            <span class="paper-meta-key">Date</span>
+            <span class="paper-meta-val">7 April 2026</span>
+          </div>
+          <div class="paper-meta-row">
+            <span class="paper-meta-key">Case Study</span>
+            <span class="paper-meta-val">France's 2023 Abaya Ban</span>
+          </div>
+          <div class="paper-meta-row">
+            <span class="paper-meta-key">Key Sources</span>
+            <span class="paper-meta-val">Mahmood, Smith, Jansen</span>
+          </div>
+        </div>
+        <div class="paper-toc">
+          <h4>Contents</h4>
+          <ol>
+            <li>Secularism as Classification</li>
+            <li>Sociological Foundations of Laïcité</li>
+            <li>Misreading Religious Practice</li>
+            <li>Freedom's Contradiction</li>
+            <li>Neutrality & Difference</li>
+            <li>Gendered Logic</li>
+            <li>Toward Inclusion</li>
+            <li>Conclusion</li>
+          </ol>
+        </div>
+      </div>
+
+      <!-- Paper body -->
+      <div class="paper-body">
+        <p>In 2023, French public schools openly banned the abaya within the school's premises as a defense of secularism. While it might appear simple, as the public institutions might want to appear neutral and don’t want to favor any particular religion, by looking at it sociologically, it becomes clear that the issue is far more complex. The ban is not just about clothing or public representation; it's about who gets to define religion, identity, and freedom in our modern society. In this essay, we will explore how the abaya ban reveals a central contradiction within secularism. As in Western culture, there are assumptions about what religion should look like, which disproportionately affect Muslim women and limit their ability to define their own identities on their own terms.</p>
+
+        <h3>Secularism as a System of Classification, not just separation</h3>
+        <p>A common stigma here is that secularism or Laïcité, as we’re talking about an event in France, is simply the separation between religion and the state. The state becomes neutral by removing religion from public institutions, but in sociology, this neutrality is not as objective as it appears. Jonathan Z. Smith argues that “religion” itself is not a natural or universal category. It is a conceptual tool created by scholars and institutions to attempt to organize human behavior<span class="citation">(Smith, 1998)</span>.</p>
+        <p>In other words, religion is not simply discovered; it is deemed. Historically, this definition has been shaped by the more prominent or more documented religion, such as Western Protestant Christianity, which tends to treat religion as private belief rather than public practice. Saba Mahmood, an anthropology professor at Berkeley, builds upon this idea by showing that secularism does not simply separate religion from our society; it is the active component that reshapes what a religion is in the first place. Secular governance sets boundaries around what religious expression could be and how it should appear in public life <span class="citation">(Mahmood, 2005)</span>. Another point is that the distinction between “religious” and “secular” is not fixed or universal, but actually socially constructed through the histories and the political settings behind it <span class="citation">(Jansen, 2011)</span> As brought up by Yolande Jansen, the definition of “too religious” isn’t or can’t be looked at as an objective truth; it is just another interpretation of a body of power.</p>
+
+        <h3>The Sociological Foundations of French Secularism</h3>
+        <p>Durkheim saw religion as a system of collective symbols that binds society together. In France, the Republic has essentially replaced traditional religion with a "civic religion," turning the school into a secular temple for collective identity. From a Durkheimian perspective, wearing an abaya can be interpreted as a "profane" practice that disrupts this civic ritual.</p>
+        <blockquote>From a Weberian lens, the French state's obsession with defining what is and is not a "religious sign" — and acting with its power to deem something "too religious" — is rationalization in action: the attempt to disenchant the school by removing anything that suggests allegiance to something higher than the State.</blockquote>
+        <p>From a Marxist perspective, Laïcité functions as an ideology — part of the superstructure — that justifies the power of the dominant cultural class over minorities. By labeling the abaya "oppressive," the governing power uses a false consciousness argument to bypass the actual agency of Muslim students.</p>
+
+        <h3>The Misreading of Religious Practice</h3>
+        <p>The French government often justifies the ban by framing the abaya as a symbol of extremism or female oppression. Mahmood's <em>Politics of Piety</em> challenges this directly: religious practice should not automatically be understood through a Western liberal lens that equates freedom with resistance to tradition <span class="citation">(Mahmood, 2005)</span>. Religious discipline can be a form of ethical self-determination. Agency is not limited to rejecting norms — it can exist within them.</p>
+        <p>There are many reasons a woman might wear an abaya — faith, identity, modesty, or personal meaning. To jump to the conclusion of oppression insults the complexity and history behind the garment. Jansen reinforces this critique by showing that secular governance often defines religion from a position of authority rather than from within lived practice <span class="citation">(Jansen, 2011)</span>.</p>
+
+        <h3>Freedom's Contradiction</h3>
+        <p>The abaya ban is frequently justified in the name of protecting freedom and equality. But this raises a deeper contradiction: freedom is being used to justify restriction. Mahmood argues that this view is limited because it only recognizes one type of agency — liberal autonomy <span class="citation">(Mahmood, 2005)</span>. Jansen similarly points out that secular systems do not simply allow freedom; they define what freedom looks like <span class="citation">(Jansen, 2011)</span>.</p>
+        <p>The state claims to protect young women from religious pressure, but does so by restricting their ability to choose how they dress. This implies that liberation requires the reduction of religious visibility — a very specific definition of freedom.</p>
+
+        <h3>Neutrality and the Production of Difference</h3>
+        <p>Secularism does not eliminate religious difference — it produces it. By labeling certain practices "too visible" or "too religious," governance creates categories of difference that must be managed. While secularism applies to everyone on paper, it unfairly affects groups whose identities are more publicly visible. "Neutral" in Western secular contexts often reflects majority cultural norms that have become invisible through repetition <span class="citation">(Jansen, 2011)</span>.</p>
+
+        <h3>The Gendered Logic of the Ban</h3>
+        <p>Although the policy applies broadly, its impact falls almost exclusively on Muslim women. Mahmood shows that debates about religion and modernity often center on women as symbols of cultural authenticity or backwardness <span class="citation">(Mahmood, 2005)</span>. Muslim women wearing abayas are not just seen as students — they are treated as representatives of broader cultural debates. Their personal choices become political statements, whether they intend them or not.</p>
+
+        <h3>Toward a More Inclusive Framework</h3>
+        <p>If neutrality requires individuals to hide visible aspects of identity, it is not truly neutral — it favors those whose identity already conforms to dominant norms. Mahmood suggests that a more inclusive approach would recognize that different forms of life have internal logic and meaning that cannot be reduced to one model of freedom <span class="citation">(Mahmood, 2005)</span>.</p>
+
+        <h3>Conclusion</h3>
+        <p>The abaya ban is a show of power — an example of the state deciding which identities are acceptable in public life. Secularism cannot be neutral; it shapes religion, defining something deeply complex. While it claims to promote equality, it limits the self-expression of minority groups, particularly Muslim women. The deeper issue is not the abaya itself, but the question of who has the authority to decide what is "religion" and what constitutes an acceptable "religious practice."</p>
+
+        <div class="works-cited">
+          <h3>Works Cited</h3>
+          <p>Jansen, Yolande. "Postsecularism, Piety and Fanaticism." <em>Philosophy & Social Criticism</em>, 2011.</p>
+          <p>Mahmood, Saba. <em>Politics of Piety</em>. Princeton University Press, 2005.</p>
+          <p>Smith, Jonathan Z. "Religion, Religions, Religious." <em>Critical Terms for Religious Studies</em>, 1998.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFLECTION -->
+<section id="reflection">
+  <div class="section-inner">
+    <p class="section-tag">Personal Reflection</p>
+    <h2 class="section-title">What I've Learned</h2>
+    <div class="divider"></div>
+    <div class="reflection-content">
+      <p>When I started this course, my question felt simple: does religion help society progress? Growing up Buddhist in Laos, religion was never something I questioned — it was just part of life, part of the rhythm of the community. The That Luang Festival, the morning alms-giving, the way Buddhist ethics shaped how neighbors treated one another — these felt like obvious examples of religion doing good.</p>
+
+      <div class="reflection-pull">
+        "Religion seemed to always bring a lot of people with different views to think the same way and work towards the same goal. But the more I learned, the more I realized: that collectivism has costs."
+      </div>
+
+      <p>Marx helped me see that the same collective force that brings people together can also be used to <strong>maintain inequality</strong>. Weber showed me that religious teachings can transform entire civilizations — but also trap them in systems of their own making. Rational Choice Theory made me reconsider whether religion works more like a marketplace than a revelation: people choose what serves their needs, and competition drives vitality.</p>
+
+      <p>What surprised me most was studying the abaya ban. Coming from a majority-Buddhist country, the idea that a secular state could be just as imposing as a religious one was new to me. France claims to be neutral, but as Mahmood and Smith show, neutrality is never truly neutral — it reflects whoever has the power to define it.</p>
+
+      <p>This course has given me tools I didn't have before. I came in wondering whether Buddhism's teachings were what made Lao society cohesive, or whether it was just the fact that everyone shared the same tradition. Now I think the answer is more complex: <strong>teachings create meaning, collectivism creates momentum, and power decides which meanings get to be called "religion" in the first place.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Perfect Phanitchaleun</strong> &nbsp;·&nbsp; REL S343, Sociology of Religion &nbsp;·&nbsp; San Diego State University &nbsp;·&nbsp; Spring 2026</p>
+  <p style="margin-top:0.5rem;">Professor Rebecca Bartel</p>
+</footer>
+
+<script>
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
+  document.querySelectorAll('.evidence-card').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
